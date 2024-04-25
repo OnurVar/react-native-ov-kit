@@ -6,8 +6,8 @@ import { TextPalette } from 'react-native-ov-kit';
 
 SplashScreen.preventAutoHideAsync();
 
-TextPalette.setup({
-  defaultFamilyName: 'SF-Pro-Text-Ultralight',
+const SF_Pro_Text_TextPalette = new TextPalette({
+  defaultFamilyName: 'SF Pro Text',
   thinFamilyName: 'SF-Pro-Text-Thin',
   ultralightFamilyName: 'SF-Pro-Text-Ultralight',
   lightFamilyName: 'SF-Pro-Text-Light',
@@ -17,6 +17,7 @@ TextPalette.setup({
   boldFamilyName: 'SF-Pro-Text-Bold',
   heavyFamilyName: 'SF-Pro-Text-Heavy',
   blackFamilyName: 'SF-Pro-Text-Black',
+  getLineHeight: (fontSize: number) => fontSize * 1.4,
 });
 
 export default function App() {
@@ -41,19 +42,37 @@ export default function App() {
   if (!fontsLoaded && !fontError) {
     return null;
   }
-  console.log(TextPalette.black_900(25));
+
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       {/* <OVButton /> */}
-      <Text style={{ ...TextPalette.ultra_light_100(20) }}>HOEOEOE</Text>
-      <Text style={{ ...TextPalette.thin_200(20) }}>HOEOEOE</Text>
-      <Text style={{ ...TextPalette.light_300(20) }}>HOEOEOE</Text>
-      <Text style={{ ...TextPalette.regular_400(20) }}>HOEOEOE</Text>
-      <Text style={{ ...TextPalette.medium_500(20) }}>HOEOEOE</Text>
-      <Text style={{ ...TextPalette.semibold_600(20) }}>HOEOEOE</Text>
-      <Text style={{ ...TextPalette.bold_700(20) }}>HOEOEOE</Text>
-      <Text style={{ ...TextPalette.heavy_800(20) }}>HOEOEOE</Text>
-      <Text style={{ ...TextPalette.black_900(20) }}>HOEOEOE</Text>
+      <Text style={{ ...SF_Pro_Text_TextPalette.ultralight_100(20) }}>
+        The quick brown fox jumps over the lazy dog
+      </Text>
+      <Text style={{ ...SF_Pro_Text_TextPalette.thin_200(20) }}>
+        The quick brown fox jumps over the lazy dog
+      </Text>
+      <Text style={{ ...SF_Pro_Text_TextPalette.light_300(20) }}>
+        The quick brown fox jumps over the lazy dog
+      </Text>
+      <Text style={{ ...SF_Pro_Text_TextPalette.regular_400(20) }}>
+        The quick brown fox jumps over the lazy dog
+      </Text>
+      <Text style={{ ...SF_Pro_Text_TextPalette.medium_500(20) }}>
+        The quick brown fox jumps over the lazy dog
+      </Text>
+      <Text style={{ ...SF_Pro_Text_TextPalette.semibold_600(20) }}>
+        The quick brown fox jumps over the lazy dog
+      </Text>
+      <Text style={{ ...SF_Pro_Text_TextPalette.bold_700(20) }}>
+        The quick brown fox jumps over the lazy dog
+      </Text>
+      <Text style={{ ...SF_Pro_Text_TextPalette.heavy_800(20) }}>
+        The quick brown fox jumps over the lazy dog
+      </Text>
+      <Text style={{ ...SF_Pro_Text_TextPalette.black_900(20) }}>
+        The quick brown fox jumps over the lazy dog
+      </Text>
     </View>
   );
 }

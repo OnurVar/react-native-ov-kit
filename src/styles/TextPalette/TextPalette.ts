@@ -1,146 +1,129 @@
 import { Platform } from 'react-native';
 
-import { TextPaletteStorage } from './TextPaletteStorage';
-
-import type { TextPaletteStyle } from './TextPaletteStyle';
 import type { TextPaletteConfig } from './TextPaletteConfig';
+import type { TextPaletteStyle } from './TextPaletteStyle';
 
-const GetLineHeight = (fontSize: number): number => fontSize * 1.35;
+export class TextPalette {
+  public defaultFamilyName?: string;
+  public thinFamilyName?: string;
+  public ultralightFamilyName?: string;
+  public lightFamilyName?: string;
+  public regularFamilyName?: string;
+  public mediumFamilyName?: string;
+  public semiboldFamilyName?: string;
+  public boldFamilyName?: string;
+  public heavyFamilyName?: string;
+  public blackFamilyName?: string;
+  public getLineHeight?: (fontSize: number) => number;
 
-export const TextPalette = {
-  /**
-   * Setup the TextPalette
-   * @param config
-   */
-  setup: (config: TextPaletteConfig) => {
-    TextPaletteStorage.getInstance().setup(config);
-  },
+  constructor(config?: TextPaletteConfig) {
+    this.defaultFamilyName = config?.defaultFamilyName;
+    this.thinFamilyName = config?.thinFamilyName;
+    this.ultralightFamilyName = config?.ultralightFamilyName;
+    this.lightFamilyName = config?.lightFamilyName;
+    this.regularFamilyName = config?.regularFamilyName;
+    this.mediumFamilyName = config?.mediumFamilyName;
+    this.semiboldFamilyName = config?.semiboldFamilyName;
+    this.boldFamilyName = config?.boldFamilyName;
+    this.heavyFamilyName = config?.heavyFamilyName;
+    this.blackFamilyName = config?.blackFamilyName;
+    this.getLineHeight = config?.getLineHeight;
+  }
 
-  /**
-   * @FONT_WEIGHT 100
-   */
-  ultra_light_100: (fontSize: number): TextPaletteStyle => {
+  private _getLineHeight = (fontSize: number): number | undefined => {
+    if (typeof this.getLineHeight !== 'function') {
+      return undefined;
+    }
+    return this.getLineHeight(fontSize);
+  };
+
+  public ultralight_100 = (fontSize: number): TextPaletteStyle => {
     const isiOS = Platform.OS === 'ios';
     return {
-      lineHeight: GetLineHeight(fontSize),
       fontSize,
-      fontFamily: isiOS
-        ? TextPaletteStorage.getInstance().defaultFamilyName
-        : TextPaletteStorage.getInstance().ultralightFamilyName,
+      lineHeight: this._getLineHeight(fontSize),
+      fontFamily: isiOS ? this.defaultFamilyName : this.ultralightFamilyName,
       fontWeight: isiOS ? '100' : undefined,
     };
-  },
-  /**
-   * @FONT_WEIGHT 200
-   */
-  thin_200: (fontSize: number): TextPaletteStyle => {
+  };
+
+  public thin_200 = (fontSize: number): TextPaletteStyle => {
     const isiOS = Platform.OS === 'ios';
     return {
-      lineHeight: GetLineHeight(fontSize),
       fontSize,
-      fontFamily: isiOS
-        ? TextPaletteStorage.getInstance().defaultFamilyName
-        : TextPaletteStorage.getInstance().thinFamilyName,
+      lineHeight: this._getLineHeight(fontSize),
+      fontFamily: isiOS ? this.defaultFamilyName : this.thinFamilyName,
       fontWeight: isiOS ? '200' : undefined,
     };
-  },
-  /**
-   * @FONT_WEIGHT 300
-   */
-  light_300: (fontSize: number): TextPaletteStyle => {
+  };
+
+  public light_300 = (fontSize: number): TextPaletteStyle => {
     const isiOS = Platform.OS === 'ios';
     return {
-      lineHeight: GetLineHeight(fontSize),
       fontSize,
-      fontFamily: isiOS
-        ? TextPaletteStorage.getInstance().defaultFamilyName
-        : TextPaletteStorage.getInstance().lightFamilyName,
+      lineHeight: this._getLineHeight(fontSize),
+      fontFamily: isiOS ? this.defaultFamilyName : this.lightFamilyName,
       fontWeight: isiOS ? '300' : undefined,
     };
-  },
-  /**
-   * @FONT_WEIGHT 400
-   */
-  regular_400: (fontSize: number): TextPaletteStyle => {
+  };
+
+  public regular_400 = (fontSize: number): TextPaletteStyle => {
     const isiOS = Platform.OS === 'ios';
     return {
-      lineHeight: GetLineHeight(fontSize),
       fontSize,
-      fontFamily: isiOS
-        ? TextPaletteStorage.getInstance().defaultFamilyName
-        : TextPaletteStorage.getInstance().regularFamilyName,
+      lineHeight: this._getLineHeight(fontSize),
+      fontFamily: isiOS ? this.defaultFamilyName : this.regularFamilyName,
       fontWeight: isiOS ? '400' : undefined,
     };
-  },
-  /**
-   * @FONT_WEIGHT 500
-   */
-  medium_500: (fontSize: number): TextPaletteStyle => {
+  };
+
+  public medium_500 = (fontSize: number): TextPaletteStyle => {
     const isiOS = Platform.OS === 'ios';
     return {
-      lineHeight: GetLineHeight(fontSize),
       fontSize,
-      fontFamily: isiOS
-        ? TextPaletteStorage.getInstance().defaultFamilyName
-        : TextPaletteStorage.getInstance().mediumFamilyName,
+      lineHeight: this._getLineHeight(fontSize),
+      fontFamily: isiOS ? this.defaultFamilyName : this.mediumFamilyName,
       fontWeight: isiOS ? '500' : undefined,
     };
-  },
-  /**
-  /**
-   * @FONT_WEIGHT 600
-   */
-  semibold_600: (fontSize: number): TextPaletteStyle => {
+  };
+
+  public semibold_600 = (fontSize: number): TextPaletteStyle => {
     const isiOS = Platform.OS === 'ios';
     return {
-      lineHeight: GetLineHeight(fontSize),
       fontSize,
-      fontFamily: isiOS
-        ? TextPaletteStorage.getInstance().defaultFamilyName
-        : TextPaletteStorage.getInstance().semiboldFamilyName,
+      lineHeight: this._getLineHeight(fontSize),
+      fontFamily: isiOS ? this.defaultFamilyName : this.semiboldFamilyName,
       fontWeight: isiOS ? '600' : undefined,
     };
-  },
-  /**
-   * @FONT_WEIGHT 700
-   */
-  bold_700: (fontSize: number): TextPaletteStyle => {
+  };
+
+  public bold_700 = (fontSize: number): TextPaletteStyle => {
     const isiOS = Platform.OS === 'ios';
     return {
-      lineHeight: GetLineHeight(fontSize),
       fontSize,
-      fontFamily: isiOS
-        ? TextPaletteStorage.getInstance().defaultFamilyName
-        : TextPaletteStorage.getInstance().boldFamilyName,
+      lineHeight: this._getLineHeight(fontSize),
+      fontFamily: isiOS ? this.defaultFamilyName : this.boldFamilyName,
       fontWeight: isiOS ? '700' : undefined,
     };
-  },
-  /**
-   * @FONT_WEIGHT 800
-   */
-  heavy_800: (fontSize: number): TextPaletteStyle => {
+  };
+
+  public heavy_800 = (fontSize: number): TextPaletteStyle => {
     const isiOS = Platform.OS === 'ios';
     return {
-      lineHeight: GetLineHeight(fontSize),
       fontSize,
-      fontFamily: isiOS
-        ? TextPaletteStorage.getInstance().defaultFamilyName
-        : TextPaletteStorage.getInstance().heavyFamilyName,
+      lineHeight: this._getLineHeight(fontSize),
+      fontFamily: isiOS ? this.defaultFamilyName : this.heavyFamilyName,
       fontWeight: isiOS ? '800' : undefined,
     };
-  },
-  /**
-   * @FONT_WEIGHT 900
-   */
-  black_900: (fontSize: number): TextPaletteStyle => {
+  };
+
+  public black_900 = (fontSize: number): TextPaletteStyle => {
     const isiOS = Platform.OS === 'ios';
     return {
-      lineHeight: GetLineHeight(fontSize),
       fontSize,
-      fontFamily: isiOS
-        ? TextPaletteStorage.getInstance().defaultFamilyName
-        : TextPaletteStorage.getInstance().blackFamilyName,
+      lineHeight: this._getLineHeight(fontSize),
+      fontFamily: isiOS ? this.defaultFamilyName : this.blackFamilyName,
       fontWeight: isiOS ? '900' : undefined,
     };
-  },
-};
+  };
+}

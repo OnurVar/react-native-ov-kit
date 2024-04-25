@@ -9,4 +9,5 @@ export interface TextPaletteConfig {
   boldFamilyName?: string;
   heavyFamilyName?: string;
   blackFamilyName?: string;
+  getLineHeight?: (fontSize: number) => number;
 }
