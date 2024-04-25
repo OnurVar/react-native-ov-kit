@@ -8337,6 +8337,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-splash-screen@npm:~0.26.5":
+  version: 0.26.5
+  resolution: "expo-splash-screen@npm:0.26.5"
+  dependencies:
+    "@expo/prebuild-config": 6.8.1
+  peerDependencies:
+    expo: "*"
+  checksum: 8db35fa492e525ecddb783a677be7b33220c27865ecb08003a438457467dab1f3fb9ea2d1ae636883e3707775d74327f4e491669ce80e72a3f5d90f35505d7bc
+  languageName: node
+  linkType: hard
+
 "expo-status-bar@npm:~1.11.1":
   version: 1.11.1
   resolution: "expo-status-bar@npm:1.11.1"
@@ -14710,6 +14721,8 @@ __metadata:
     babel-loader: ^8.1.0
     babel-plugin-module-resolver: ^5.0.0
     expo: ~50.0.14
+    expo-font: ~11.10.3
+    expo-splash-screen: ~0.26.5
     expo-status-bar: ~1.11.1
     react: 18.2.0
     react-dom: 18.2.0
@@ -14739,7 +14752,7 @@ __metadata:
     react-native: 0.73.6
     react-native-builder-bob: ^0.23.2
     release-it: ^15.0.0
-    typescript: ^5.2.2
+    typescript: 5.1.6
   peerDependencies:
     react: "*"
     react-native: "*"
@@ -17150,7 +17163,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.6.4 || ^5.2.2, typescript@npm:^5.2.2":
+"typescript@npm:5.1.6":
+  version: 5.1.6
+  resolution: "typescript@npm:5.1.6"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: b2f2c35096035fe1f5facd1e38922ccb8558996331405eb00a5111cc948b2e733163cc22fab5db46992aba7dd520fff637f2c1df4996ff0e134e77d3249a7350
+  languageName: node
+  linkType: hard
+
+"typescript@npm:^4.6.4 || ^5.2.2":
   version: 5.4.5
   resolution: "typescript@npm:5.4.5"
   bin:
@@ -17160,7 +17183,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.6.4 || ^5.2.2#~builtin<compat/typescript>, typescript@patch:typescript@^5.2.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@5.1.6#~builtin<compat/typescript>":
+  version: 5.1.6
+  resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: f53bfe97f7c8b2b6d23cf572750d4e7d1e0c5fff1c36d859d0ec84556a827b8785077bc27676bf7e71fae538e517c3ecc0f37e7f593be913d884805d931bc8be
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^4.6.4 || ^5.2.2#~builtin<compat/typescript>":
   version: 5.4.5
   resolution: "typescript@patch:typescript@npm%3A5.4.5#~builtin<compat/typescript>::version=5.4.5&hash=14eedb"
   bin:
