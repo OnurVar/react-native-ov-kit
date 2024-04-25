@@ -1,6 +1,6 @@
 {
   "name": "react-native-ov-kit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "react-native-ov-kit",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
