@@ -1,52 +1,34 @@
-// import React from 'react';
-// import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { ActivityIndicator, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-// export interface OVLoaderProps {
-//   isBigLoader?: boolean;
-//   height?: number;
-//   expandToParent?: boolean;
-//   tintColor?: string;
-//   enableTopBottomPadding?: boolean;
-// }
+import { StylePalette } from '../styles';
 
-// export const OVLoader = (props: OVLoaderProps) => {
-//   //MARK: Props
-//   const {
-//     height,
-//     isBigLoader,
-//     expandToParent,
-//     tintColor,
-//     enableTopBottomPadding,
-//   } = props;
+export interface OVLoaderProps {
+  largeIndicator?: boolean;
+  expandToParent?: boolean;
+  tintColor?: string;
 
-//   //MARK: Render
-//   return (
-//     <View
-//       style={[
-//         styles.default,
-//         { height: height || undefined },
-//         expandToParent ? { flex: 1 } : null,
-//         enableTopBottomPadding ? styles.topBottomPadding : null,
-//       ]}
-//     >
-//       <ActivityIndicator
-//         style={styles.indicator}
-//         size={isBigLoader ? 'large' : 'small'}
-//         color={tintColor || colors.text}
-//       />
-//     </View>
-//   );
-// };
+  containerStyle?: StyleProp<ViewStyle>;
+  activityIndicatorStyle?: StyleProp<ViewStyle>;
+}
 
-// const styles = StyleSheet.create({
-//   default: {
-//     ...StylePalette.alignment.center,
-//   },
-//   indicator: {
-//     width: NormalSpace,
-//     height: NormalSpace,
-//   },
-//   topBottomPadding: {
-//     ...Padding(14).topBottom,
-//   },
-// });
+export const OVLoader = (props: OVLoaderProps) => {
+  //MARK: Props
+  const { largeIndicator, expandToParent, tintColor, containerStyle, activityIndicatorStyle } = props;
+
+  //MARK: Render
+  return (
+    <View style={[styles.default, expandToParent ? styles.expandToParent : null, containerStyle]}>
+      <ActivityIndicator style={activityIndicatorStyle} size={largeIndicator ? 'large' : 'small'} color={tintColor || 'black'} />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  default: {
+    ...StylePalette.alignment.center,
+  },
+  expandToParent: {
+    ...StylePalette.size.expandToParent,
+  },
+});

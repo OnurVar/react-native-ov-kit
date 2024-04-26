@@ -2,7 +2,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { TextPalette } from 'react-native-ov-kit';
+import { OVButton, OVLoader, TextPalette } from 'react-native-ov-kit';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,34 +45,18 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      {/* <OVButton /> */}
-      <Text style={{ ...SF_Pro_Text_TextPalette.ultralight_100(20) }}>
-        The quick brown fox jumps over the lazy dog
-      </Text>
-      <Text style={{ ...SF_Pro_Text_TextPalette.thin_200(20) }}>
-        The quick brown fox jumps over the lazy dog
-      </Text>
-      <Text style={{ ...SF_Pro_Text_TextPalette.light_300(20) }}>
-        The quick brown fox jumps over the lazy dog
-      </Text>
-      <Text style={{ ...SF_Pro_Text_TextPalette.regular_400(20) }}>
-        The quick brown fox jumps over the lazy dog
-      </Text>
-      <Text style={{ ...SF_Pro_Text_TextPalette.medium_500(20) }}>
-        The quick brown fox jumps over the lazy dog
-      </Text>
-      <Text style={{ ...SF_Pro_Text_TextPalette.semibold_600(20) }}>
-        The quick brown fox jumps over the lazy dog
-      </Text>
-      <Text style={{ ...SF_Pro_Text_TextPalette.bold_700(20) }}>
-        The quick brown fox jumps over the lazy dog
-      </Text>
-      <Text style={{ ...SF_Pro_Text_TextPalette.heavy_800(20) }}>
-        The quick brown fox jumps over the lazy dog
-      </Text>
-      <Text style={{ ...SF_Pro_Text_TextPalette.black_900(20) }}>
-        The quick brown fox jumps over the lazy dog
-      </Text>
+      <Text style={styles.ultrathinTitle}>The quick brown fox jumps over the lazy dog</Text>
+      <Text style={styles.thinTitle}>The quick brown fox jumps over the lazy dog</Text>
+      <Text style={styles.lightTitle}>The quick brown fox jumps over the lazy dog</Text>
+      <Text style={styles.regularTitle}>The quick brown fox jumps over the lazy dog</Text>
+      <Text style={styles.mediumTitle}>The quick brown fox jumps over the lazy dog</Text>
+      <Text style={styles.semiboldTitle}>The quick brown fox jumps over the lazy dog</Text>
+      <Text style={styles.boldTitle}>The quick brown fox jumps over the lazy dog</Text>
+      <Text style={styles.heavyTitle}>The quick brown fox jumps over the lazy dog</Text>
+      <Text style={styles.blackTitle}>The quick brown fox jumps over the lazy dog</Text>
+      <View style={styles.box} />
+      <OVLoader largeIndicator tintColor="red" />
+      <OVButton title={'CLICK ME'} />
     </View>
   );
 }
@@ -80,12 +64,37 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   box: {
     width: 60,
     height: 60,
     marginVertical: 20,
+  },
+  ultrathinTitle: {
+    ...SF_Pro_Text_TextPalette.ultralight_100(20),
+  },
+  thinTitle: {
+    ...SF_Pro_Text_TextPalette.thin_200(20),
+  },
+  lightTitle: {
+    ...SF_Pro_Text_TextPalette.light_300(20),
+  },
+  regularTitle: {
+    ...SF_Pro_Text_TextPalette.regular_400(20),
+  },
+  mediumTitle: {
+    ...SF_Pro_Text_TextPalette.medium_500(20),
+  },
+  semiboldTitle: {
+    ...SF_Pro_Text_TextPalette.semibold_600(20),
+  },
+  boldTitle: {
+    ...SF_Pro_Text_TextPalette.bold_700(20),
+  },
+  heavyTitle: {
+    ...SF_Pro_Text_TextPalette.heavy_800(20),
+  },
+  blackTitle: {
+    ...SF_Pro_Text_TextPalette.black_900(20),
   },
 });

@@ -1,165 +1,186 @@
-// import { DynamicText, DynamicTouchableOpacity, Loader } from '@components';
-// import { Margin, StylePalette, TextPalette, useCustomTheme } from '@styles';
-// import React from 'react';
-// import {
-//   StyleProp,
-//   StyleSheet,
-//   TextStyle,
-//   View,
-//   ViewStyle,
-// } from 'react-native';
+import React from 'react';
+import { StyleProp, StyleSheet, Text, TextProps, TextStyle, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } from 'react-native';
 
-// export interface OVButtonProps {
-//   title?: string;
+import { Margin, StylePalette } from '../styles';
+import { OVLoader, OVLoaderProps } from './OVLoader';
 
-//   tintColor?: string;
-//   selectedTintColor?: string;
-//   disabledTintColor?: string;
-//   backgroundColor?: string;
-//   selectedBackgroundColor?: string;
-//   disabledBackgroundColor?: string;
-//   borderColor?: string;
-//   isSelected?: boolean;
-//   isDisabled?: boolean;
-//   isLoading?: boolean;
-//   height?: number;
-//   width?: number;
-//   dynamicTextStyle?: StyleProp<TextStyle>;
-//   borderRadius?: number;
-//   borderWidth?: number;
-//   isImageOnRightSide?: boolean;
-//   imageSize?: number;
-//   showBorder?: boolean;
-//   style?: StyleProp<ViewStyle>;
-//   ImageComponent?: (tintColor: string, size: number) => JSX.Element;
-//   onPress?: () => void;
-//   onDisabledPress?: () => void;
-// }
+export interface OVButtonProps {
+  title?: string;
 
-// export const OVButton = (props: OVButtonProps) => {
-//   //MARK: Props
-//   const {
-//     title,
-//     tintColor,
-//     selectedTintColor,
-//     disabledTintColor,
-//     backgroundColor,
-//     selectedBackgroundColor,
-//     disabledBackgroundColor,
-//     borderColor,
-//     isSelected,
-//     isDisabled,
-//     isLoading,
-//     height,
-//     width,
-//     dynamicTextStyle,
-//     borderRadius,
-//     borderWidth,
-//     isImageOnRightSide,
-//     imageSize,
-//     showBorder,
-//     style,
-//     ImageComponent,
-//     onPress,
-//     onDisabledPress,
-//   } = props;
+  enabledTheme?: StateTheme;
+  selectedTheme?: StateTheme;
+  disabledTheme?: StateTheme;
 
-//   //MARK: Hooks
-//   const { colors } = useCustomTheme();
+  isLoading?: boolean;
+  isSelected?: boolean;
+  isDisabled?: boolean;
 
-//   //MARK: Calculations
-//   let calculatedHeight = height || 50;
-//   let calculatedBorderRadius = borderRadius || 25;
-//   let calculateedWidth = typeof width === 'number' ? width : undefined;
-//   let calculatedMinWidth = typeof width === 'number' ? undefined : 50;
-//   let calculatedBackgroundColor: string;
-//   let calculatedTintColor: string;
-//   let calculatedBorderColor = borderColor;
+  height?: number;
+  width?: number;
 
-//   if (isDisabled) {
-//     calculatedBackgroundColor =
-//       disabledBackgroundColor ||
-//       colors.Component.Button.Primary.DisabledBackground;
-//     calculatedTintColor =
-//       disabledTintColor || colors.Component.Button.Primary.DisabledTint;
-//   } else if (isSelected) {
-//     calculatedBackgroundColor =
-//       selectedBackgroundColor ||
-//       colors.Component.Button.Primary.SelectedBackground;
-//     calculatedTintColor =
-//       selectedTintColor || colors.Component.Button.Primary.SelectedTint;
-//   } else {
-//     calculatedBackgroundColor =
-//       backgroundColor || colors.Component.Button.Primary.Background;
-//     calculatedTintColor = tintColor || colors.Component.Button.Primary.Tint;
-//   }
+  borderRadius?: number;
+  borderWidth?: number;
+  showBorder?: boolean;
 
-//   //MARK: Action Methods
-//   const onButtonPress = () => {
-//     if (isDisabled) {
-//       onDisabledPress && onDisabledPress();
-//     } else if (!isLoading) {
-//       onPress && onPress();
-//     }
-//   };
+  textStyle?: StyleProp<TextStyle>;
+  buttonStyle?: StyleProp<ViewStyle>;
 
-//   //MARK: Render
-//   return (
-//     <DynamicTouchableOpacity
-//       onPress={onButtonPress}
-//       style={[
-//         {
-//           height: calculatedHeight,
-//           width: calculateedWidth,
-//           minWidth: calculatedMinWidth,
-//           borderRadius: calculatedBorderRadius,
-//           backgroundColor: calculatedBackgroundColor,
-//         },
-//         showBorder
-//           ? { borderColor: calculatedBorderColor, borderWidth }
-//           : undefined,
-//         style,
-//       ]}
-//     >
-//       <View style={styles.container}>
-//         {isLoading ? (
-//           <Loader tintColor={calculatedTintColor} />
-//         ) : (
-//           <>
-//             {!isImageOnRightSide &&
-//               ImageComponent &&
-//               ImageComponent(calculatedTintColor, imageSize || 24)}
-//             {typeof title === 'string' && (
-//               <DynamicText
-//                 style={[
-//                   typeof ImageComponent !== 'undefined'
-//                     ? styles.titleMargin
-//                     : undefined,
-//                   TextPalette.gotham_medium(12),
-//                   { color: calculatedTintColor },
-//                   dynamicTextStyle,
-//                 ]}
-//               >
-//                 {title}
-//               </DynamicText>
-//             )}
-//             {isImageOnRightSide &&
-//               ImageComponent &&
-//               ImageComponent(calculatedTintColor, imageSize || 24)}
-//           </>
-//         )}
-//       </View>
-//     </DynamicTouchableOpacity>
-//   );
-// };
+  LeadingImageComponent?: (tintColor: string, size: number) => JSX.Element;
+  TrailingImageComponent?: (tintColor: string, size: number) => JSX.Element;
+  imageSize?: number;
 
-// const styles = StyleSheet.create({
-//   container: {
-//     ...StylePalette.size.expandToParent,
-//     ...StylePalette.alignment.centerRow,
-//   },
-//   titleMargin: {
-//     ...Margin(6).left,
-//     ...Margin(6).right,
-//   },
-// });
+  loaderProps?: OVLoaderProps;
+  buttonProps?: TouchableOpacityProps;
+  textProps?: TextProps;
+
+  onPress?: () => void;
+  onDisabledPress?: () => void;
+}
+
+interface StateTheme {
+  tintColor?: string;
+  backgroundColor?: string;
+  borderColor?: string;
+}
+export const OVButton = (props: OVButtonProps) => {
+  //MARK: Props
+  const {
+    title,
+
+    enabledTheme,
+    selectedTheme,
+    disabledTheme,
+
+    isLoading,
+    isSelected,
+    isDisabled,
+
+    height: propHeight,
+    width: propWidth,
+
+    borderRadius: propBorderRadius,
+    borderWidth: propBorderWidth,
+    showBorder: propShowBorder,
+
+    textStyle,
+    buttonStyle,
+
+    LeadingImageComponent,
+    TrailingImageComponent,
+    imageSize,
+
+    loaderProps,
+    buttonProps,
+    textProps,
+
+    onPress,
+    onDisabledPress,
+  } = props;
+
+  //MARK: Calculations
+  const height = propHeight || 50;
+  const borderRadius = propBorderRadius || 25;
+  const width = typeof propWidth === 'number' ? propWidth : undefined;
+  const minWidth = typeof width === 'number' ? undefined : 50;
+  const borderWidth = propBorderWidth || 0;
+  const showBorder = propShowBorder || false;
+
+  let tintColor: string;
+  let borderColor: string;
+  let backgroundColor: string;
+
+  const isLeadingOrTrailingImageAvailable = typeof LeadingImageComponent !== 'undefined' || typeof TrailingImageComponent !== 'undefined';
+
+  if (isDisabled) {
+    tintColor = disabledTheme?.tintColor || enabledTheme?.tintColor || 'black';
+    borderColor = disabledTheme?.borderColor || enabledTheme?.borderColor || tintColor;
+    backgroundColor = disabledTheme?.backgroundColor || enabledTheme?.backgroundColor || 'transparent';
+  } else if (isSelected) {
+    tintColor = selectedTheme?.tintColor || enabledTheme?.tintColor || 'black';
+    borderColor = selectedTheme?.borderColor || enabledTheme?.borderColor || tintColor;
+    backgroundColor = selectedTheme?.backgroundColor || enabledTheme?.backgroundColor || 'transparent';
+  } else {
+    tintColor = enabledTheme?.tintColor || 'black';
+    borderColor = enabledTheme?.borderColor || tintColor;
+    backgroundColor = enabledTheme?.backgroundColor || 'transparent';
+  }
+
+  //MARK: Action Methods
+  const onButtonPress = () => {
+    if (isDisabled) {
+      onDisabledPress && onDisabledPress();
+    } else if (!isLoading) {
+      onPress && onPress();
+    }
+  };
+
+  //MARK: Render
+  const renderTitle = () => {
+    if (typeof title === 'string') {
+      return (
+        <Text style={[isLeadingOrTrailingImageAvailable ? styles.titleMargin : undefined, { color: tintColor }, textStyle]} {...textProps}>
+          {title}
+        </Text>
+      );
+    }
+    return undefined;
+  };
+  const renderLeadingImage = () => {
+    if (typeof LeadingImageComponent === 'function') {
+      return LeadingImageComponent(tintColor, imageSize || 24);
+    }
+    return undefined;
+  };
+  const renderTrailingImage = () => {
+    if (typeof TrailingImageComponent === 'function') {
+      return TrailingImageComponent(tintColor, imageSize || 24);
+    }
+    return undefined;
+  };
+  const renderLoader = () => {
+    return <OVLoader tintColor={tintColor} {...loaderProps} />;
+  };
+  return (
+    <TouchableOpacity
+      onPress={onButtonPress}
+      style={[
+        {
+          height,
+          width,
+          minWidth,
+          borderRadius,
+          backgroundColor,
+        },
+        showBorder ? { borderColor, borderWidth } : undefined,
+        buttonStyle,
+      ]}
+      {...buttonProps}
+    >
+      <View style={styles.container}>
+        {isLoading ? (
+          renderLoader()
+        ) : (
+          <>
+            {renderLeadingImage()}
+            {renderTitle()}
+            {renderTrailingImage()}
+          </>
+        )}
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    ...StylePalette.size.expandToParent,
+    ...StylePalette.alignment.centerRow,
+  },
+  titleMargin: {
+    ...Margin(6).left,
+    ...Margin(6).right,
+  },
+  title: {
+    fontSize: 12,
+  },
+});
