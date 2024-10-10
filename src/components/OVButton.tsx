@@ -25,8 +25,8 @@ export interface OVButtonProps {
   textStyle?: StyleProp<TextStyle>;
   buttonStyle?: StyleProp<ViewStyle>;
 
-  LeadingImageComponent?: (tintColor: string, size: number) => JSX.Element;
-  TrailingImageComponent?: (tintColor: string, size: number) => JSX.Element;
+  LeadingImageComponent?: (tintColor: string, size: number) => React.FC;
+  TrailingImageComponent?: (tintColor: string, size: number) => React.FC;
   imageSize?: number;
 
   loaderProps?: OVLoaderProps;
