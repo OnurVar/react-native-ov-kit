@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { StyleProp, StyleSheet, Text, TextProps, TextStyle, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } from 'react-native';
 
 import { Margin, StylePalette } from '../styles';
@@ -25,8 +25,8 @@ export interface OVButtonProps {
   textStyle?: StyleProp<TextStyle>;
   buttonStyle?: StyleProp<ViewStyle>;
 
-  LeadingImageComponent?: (tintColor: string, size: number) => React.FC;
-  TrailingImageComponent?: (tintColor: string, size: number) => React.FC;
+  LeadingImageComponent?: (tintColor: string, size: number) => React.FC | React.JSX.Element;
+  TrailingImageComponent?: (tintColor: string, size: number) => React.FC | React.JSX.Element;
   imageSize?: number;
 
   loaderProps?: OVLoaderProps;
@@ -106,16 +106,16 @@ export const OVButton = (props: OVButtonProps) => {
   }
 
   //MARK: Action Methods
-  const onButtonPress = () => {
+  const onButtonPress = useCallback(() => {
     if (isDisabled) {
       onDisabledPress && onDisabledPress();
     } else if (!isLoading) {
       onPress && onPress();
     }
-  };
+  }, [isDisabled, isLoading, onPress, onDisabledPress]);
 
   //MARK: Render
-  const renderTitle = () => {
+  const renderTitle = useCallback(() => {
     if (typeof title === 'string') {
       return (
         <Text style={[isLeadingOrTrailingImageAvailable ? styles.titleMargin : undefined, { color: tintColor }, textStyle]} {...textProps}>
@@ -124,22 +124,16 @@ export const OVButton = (props: OVButtonProps) => {
       );
     }
     return undefined;
-  };
-  const renderLeadingImage = () => {
-    if (typeof LeadingImageComponent === 'function') {
-      return LeadingImageComponent(tintColor, imageSize || 24);
-    }
-    return undefined;
-  };
-  const renderTrailingImage = () => {
-    if (typeof TrailingImageComponent === 'function') {
-      return TrailingImageComponent(tintColor, imageSize || 24);
-    }
-    return undefined;
-  };
-  const renderLoader = () => {
+  }, [title, textStyle, textProps, isLeadingOrTrailingImageAvailable, tintColor]);
+  const renderLeadingImage = useCallback(() => {
+    return LeadingImageComponent ? LeadingImageComponent(tintColor, imageSize || 24) : undefined;
+  }, [LeadingImageComponent, tintColor, imageSize]);
+  const renderTrailingImage = useCallback(() => {
+    return TrailingImageComponent ? TrailingImageComponent(tintColor, imageSize || 24) : undefined;
+  }, [TrailingImageComponent, tintColor, imageSize]);
+  const renderLoader = useCallback(() => {
     return <OVLoader tintColor={tintColor} {...loaderProps} />;
-  };
+  }, [tintColor, loaderProps]);
   return (
     <TouchableOpacity
       onPress={onButtonPress}
